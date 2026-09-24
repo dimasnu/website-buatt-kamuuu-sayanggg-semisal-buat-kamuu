@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Judul Tab diubah jadi 6th Monthsary -->
+    <title>Happy 6th Monthsary ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Audio Musik Romantis -->
+    <audio id="bg-music" loop>
+        <source src="ssstik.io_1790195989470.mp3" type="audio/mp3">
+        Browser Anda tidak mendukung pemutaran audio.
+    </audio>
+
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop playsinline webkit-playsinline>
+        <source src="lv_7637930655422106901_20260924100010.mp4" type="video/mp4">
+        Browser Anda tidak mendukung pemutaran video.
+    </video>
+
+    <!-- Halaman Pembuka (Splash Screen) dengan Efek Ketik -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1 id="typing-welcome"></h1>
+            <p class="sub-text">Sentuh untuk membuka sesuatu yang spesial buat kamu ✨</p>
+            <!-- Tombol Buka Pesan disembunyikan dulu sampai teks selesai diketik -->
+            <button class="open-btn hidden" id="openBtn" onclick="openPage()">Buka Pesan 💖</button>
+        </div>
+    </div>
+
+    <!-- Kotak Konten Utama di Tengah -->
+    <div class="container hidden-content" id="mainContainer">
+        
+        <!-- Bagian Atas: Kapsul Jam (Efek Muter lalu jadi Jam Real-time) -->
+        <div class="time-header">
+            <div class="date-capsule">
+                <span class="date-number"><span id="rollHours">00</span>:<span id="rollMinutes">00</span></span>
+            </div>
+            <div id="greetingText" class="greeting-style">Halo, Sayang 🤍</div>
+        </div>
+        
+        <!-- Tempat teks pesan utama berjalan otomatis -->
+        <div class="message" id="typewriterText"></div>
+        
+        <!-- Tombol I Love You (Akan muncul otomatis setelah teks pesan selesai) -->
+        <button class="love-btn hidden-content" id="loveBtn" onclick="showLovePopup()">I Love You 🤍</button>
+    </div>
+
+    <!-- Custom Popup Modal Pengganti Alert Bawaan -->
+    <div class="custom-modal-overlay hidden-content" id="loveModal">
+        <div class="custom-modal">
+            <div class="modal-icon">🤍</div>
+            <h3>I Love You So Much!</h3>
+            <p>Makasih ya udah selalu nemenin aku selama 6 bulan ini Semogaaaa kitaaa di kasih umar yang pajangg ya sayanggg bersama akuu seterusnya ✨</p>
+            <button class="modal-close-btn" onclick="closeLovePopup()">Tutup 💖</button>
+        </div>
+    </div>
+
+    <!-- Script Interaktif, Efek Ketik, Efek Muter Jam, & Jam Real-time -->
+    <script>
+        // 1. Jalankan Efek Ketik untuk Teks Sambutan di Depan
+        document.addEventListener("DOMContentLoaded", function() {
+            const textTarget = document.getElementById("typing-welcome");
+            const openBtn = document.getElementById("openBtn");
+            
+            const messageText = "Selamat ya sayanggg\nanniversary ke-6 bulan 🤍";
+            let charIndex = 0;
+            
+            function typeWriter() {
+                if (charIndex < messageText.length) {
+                    if (messageText.charAt(charIndex) === '\n') {
+                        textTarget.innerHTML += '<br>';
+                    } else {
+                        textTarget.innerHTML += messageText.charAt(charIndex);
+                    }
+                    charIndex++;
+                    setTimeout(typeWriter, 90);
+                } else {
+                    openBtn.classList.remove("hidden");
+                    openBtn.style.animation = "fadeInScale 0.8s ease-in-out";
+                }
+            }
+            
+            typeWriter();
+        });
+
+        // 2. Pesan Utama di dalam Kotak
+        const textMessage = `happyyy anniversaryyy yaa ratuuuu kuuuuu sayanggg kuu cintaaa semua dehh buatt kamuu 🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍
+
+gak kerasaaa kita udah sampai sejauh iniii, gak nyangka udah 6 bulan kita bareng-bareng. makasihhhh yaaaa udahhh selaluuu ada buattt aku, udah sabar ngadepin aku dan masih mau terus bareng sama aku sampai sekarang aku gak bisa ngasi apaa ke kamuu kaloo ada rejeki nyaa aku bisi ngbuat kamuu bahagia akuuu bisi ngasi ini ajaaa  
+aku sadar mungkin selama kita bareng aku masih banyak kurangnyaaaa buatt kamuuu kadang bikin kamu kesel, kecewa atau mungkin sakit hatiii tapiii kamuu masihh sabarr dengg  
+maafin aku yaa sayangggg aku juga bakal terus belajarrrr buat jadiuii lebih baik lagi buat kamu dan buat hubungan kitaaaaaaa...................
+
+semoga kedepannya kita bisa terus barengggg yaaaaa  bis saling ngerti,saling jaga dan jangan gampang nyerah kalau ada masalah, aku pengen hubungan kita bukan cuma sampai hari ini aja tapi masih banyak anniversary lainnya yang bisa kita rayain barenggggg selamainn ini akuu bayak kurangg nya ke kamuuu maafff yaaa kalooo sering susah kan kamuuu gak banyak yang mau aku bilang, cuma makasih udah hadirrr dann nemenin aku sampai sekarang semoga kita selalu bareng yaaaaa loveee youuuuu sayanggg kuuuuuuuu 🤍🤍🤍🤍🤍🤍🤍
+
+
+happy anniversary sayangkuuuuu   🫶🏻🤍🤍🤍🤍🤍🤍
+`;
+
+        // 3. Fungsi Saat Tombol "Buka Pesan" Ditekan
+        function openPage() {
+            const music = document.getElementById('bg-music');
+            music.play().catch(error => {
+                console.log("Autoplay dicegah oleh browser:", error);
+            });
+
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            welcomeScreen.classList.add('hidden');
+            
+            const mainContainer = document.getElementById('mainContainer');
+            mainContainer.classList.remove('hidden-content');
+            mainContainer.classList.add('show-content');
+
+            startClockRoll(); // Efek putar angka lalu jadi jam hidup
+            updateGreetingOnly();
+            startTypewriter();
+            setInterval(createEmojiHeart, 250);
+        }
+
+        // 4. Fungsi Efek Putar Angka (Roller) lalu Berhenti ke Jam Asli & Berjalan Terus
+        function startClockRoll() {
+            const hoursEl = document.getElementById('rollHours');
+            const minutesEl = document.getElementById('rollMinutes');
+            
+            let counter = 0;
+            const rollInterval = setInterval(() => {
+                let randomH = String(Math.floor(Math.random() * 24)).padStart(2, '0');
+                let randomM = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+                
+                hoursEl.innerText = randomH;
+                minutesEl.innerText = randomM;
+                
+                counter++;
+                if (counter > 15) {
+                    clearInterval(rollInterval);
+                    startLiveClock(); // Mulai jam real-time
+                }
+            }, 80);
+        }
+
+        // Fungsi Jam Real-time (Berjalan tiap detik)
+        function startLiveClock() {
+            const hoursEl = document.getElementById('rollHours');
+            const minutesEl = document.getElementById('rollMinutes');
+            
+            function updateTime() {
+                const now = new Date();
+                hoursEl.innerText = String(now.getHours()).padStart(2, '0');
+                minutesEl.innerText = String(now.getMinutes()).padStart(2, '0');
+            }
+            
+            updateTime();
+            setInterval(updateTime, 1000);
+        }
+
+        // 5. Update Sapaan Waktu Otomatis
+        function updateGreetingOnly() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting = "Halo, Sayang 🤍";
+            if (hours >= 4 && hours < 11) {
+                greeting = "Selamat Pagi, Sayang ☀️";
+            } else if (hours >= 11 && hours < 15) {
+                greeting = "Selamat Siang, Sayang 🌤️";
+            } else if (hours >= 15 && hours < 18) {
+                greeting = "Selamat Sore, Sayang 🌅";
+            } else {
+                greeting = "Selamat Malam, Sayang 🌙";
+            }
+            document.getElementById('greetingText').innerText = greeting;
+        }
+
+        // 6. Efek Ketik Pesan Utama di Kotak
+        function startTypewriter() {
+            const target = document.getElementById('typewriterText');
+            let i = 0;
+            const speed = 35; 
+
+            function type() {
+                if (i < textMessage.length) {
+                    if (textMessage.charAt(i) === '\n') {
+                        target.innerHTML += '<br>';
+                    } else {
+                        target.innerHTML += textMessage.charAt(i);
+                    }
+                    target.scrollTop = target.scrollHeight;
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    const loveBtn = document.getElementById('loveBtn');
+                    loveBtn.classList.remove('hidden-content');
+                    loveBtn.classList.add('show-content');
+                }
+            }
+            type();
+        }
+
+        // 7. Animasi Emoji Melayang
+        const emojis = ['🤍', '✨', '💫', '💖', '🌸', '🤍', '⭐'];
+
+        function createEmojiHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('emoji-heart');
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.innerHTML = randomEmoji;
+            const size = Math.random() * 18 + 14; 
+            heart.style.fontSize = size + 'px';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            const duration = Math.random() * 3 + 3; 
+            heart.style.animationDuration = duration + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // 8. Popup Modal "I Love You"
+        function showLovePopup() {
+            const modal = document.getElementById('loveModal');
+            modal.classList.remove('hidden-content');
+        }
+
+        function closeLovePopup() {
+            const modal = document.getElementById('loveModal');
+            modal.classList.add('hidden-content');
+        }
+    </script>
+</body>
+</html>
